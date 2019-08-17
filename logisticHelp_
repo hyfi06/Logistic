@@ -1,0 +1,23 @@
+Modo de empleo: ./HOV_Tarea4.sh [OPCIONES] [-o NOMBRE] [NUMERO]
+
+Crea el diagrama de birfurcación de la ecuación logarítmica, x_0 = 0.001, x_{n+1} = r * x_n (1 - x_n), del intervalo  r=1.1 a r=4. Para ello se divide el intervalo en [NUMERO] partes.
+
+OPCIONES:
+  -p, --parallel	Ejecución en paralelo usando parallel.
+  -k, --killfiles	Elimina los archivos generados durante el proceso, sobreviven las salidas únicamente.
+  -v, --verbose		Muestra las salidas a pantalla
+  -h, --help		Muestra esta ayuda y finaliza.
+
+PARAMETROS:
+  NUMERO		Número de partes en las que se dividirá el intervalo (1.1,4). Si omite se generan 100 divisiones del intervalo.
+  -o, --output NOMBRE	Renombra la salida como NOMBRE.ps, si se omite se genera diagrama_difuración.ps.
+
+REQUERIMIENTOS MÍNIMOS:
+HOV_logis.sh, HOV_gnuplot_logis.plot, gnuplot
+
+REQUERIMIENTOS PARA -p:
+parallel
+
+HOV_Tarea4.sh                            
+by Hector Olvera Vital
+hector.olvera@ciencias.unam.mx

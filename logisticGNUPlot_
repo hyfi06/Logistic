@@ -1,0 +1,7 @@
+#!/bin/gnuplot
+set title "Diagama de birfurcacion x_{n+1}= r * x_n(1-x_n)"
+set xlabel "r"
+set ylabel "x"
+set terminal postscript
+set output 'diagrama_difuración.ps'
+plot "logis.data" u 1:2 title "x_{200} a x_{400}"

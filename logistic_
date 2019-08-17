@@ -1,0 +1,52 @@
+#!/bin/bash
+#####################################################
+#   logistic_                                       #
+#   by Hector Olvera Vital                          #
+#   hector.olvera@ciencias.unam.mx                  #
+################Resumen##############################
+# Cálculo de la ecuación logística con una r dada   #
+# e imprime los últimos $n - $corte números         #
+# Configuración x_0=0.001 n=400 corte=200			#
+#####################################################
+
+#### Configuraciones ####
+x=0.001
+n=400
+corte=200
+######################### 
+verbose=0
+
+while [[ $# -ne 0 ]]
+do
+	ArG=$1
+	case $ArG in
+	-v|--verbose)
+			verbose=1
+	;;
+
+	*)
+		r=$1
+	esac
+	shift
+done
+
+if [[ ${#r[*]} -eq 0 ]]
+then
+	>&2 echo -e '\033[1;33m Warning\033[0m: No se introdujo un número. El programa continuará con r=1.1. Pulsa Ctrl+C para detener.'
+	r=1.1
+fi
+
+
+for i in `seq $n`
+do
+	x=$( echo "$r*$x*(1-$x)"| bc -l )
+	if [ $i -ge $corte ]
+	then
+		echo -e "$r\t$x"
+	fi
+done >> logis_temp.data
+
+if [ $verbose -eq 1 ]
+then
+	echo "Se escribieron de x_$corte a x_$n con r = $r en logis.data"
+fi
