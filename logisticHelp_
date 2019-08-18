@@ -1,23 +1,23 @@
-Modo de empleo: ./HOV_Tarea4.sh [OPCIONES] [-o NOMBRE] [NUMERO]
-
-Crea el diagrama de birfurcación de la ecuación logarítmica, x_0 = 0.001, x_{n+1} = r * x_n (1 - x_n), del intervalo  r=1.1 a r=4. Para ello se divide el intervalo en [NUMERO] partes.
-
-OPCIONES:
-  -p, --parallel	Ejecución en paralelo usando parallel.
-  -k, --killfiles	Elimina los archivos generados durante el proceso, sobreviven las salidas únicamente.
-  -v, --verbose		Muestra las salidas a pantalla
-  -h, --help		Muestra esta ayuda y finaliza.
-
-PARAMETROS:
-  NUMERO		Número de partes en las que se dividirá el intervalo (1.1,4). Si omite se generan 100 divisiones del intervalo.
-  -o, --output NOMBRE	Renombra la salida como NOMBRE.ps, si se omite se genera diagrama_difuración.ps.
-
-REQUERIMIENTOS MÍNIMOS:
-HOV_logis.sh, HOV_gnuplot_logis.plot, gnuplot
-
-REQUERIMIENTOS PARA -p:
-parallel
-
-HOV_Tarea4.sh                            
-by Hector Olvera Vital
+LOGISTIC(1)\n
+\033[01mSYNOPSIS\n
+\t\033[01mlogistic.sh [OPTIONS] [-o FILE] [NUM]\033[00m\n
+\n
+\033[01mDESCRIPTION\033[00m\n
+\tCrea el diagrama de birfurcación de la ecuación logarítmica, x_0 = 0.001, x_{n+1} = r * x_n (1 - x_n), del intervalo  r=1.1 a r=4. Para ello se divide el intervalo en [NUM] partes.\n
+\n
+\033[01mOPTIONS\033[00m\n
+\t\033[01m-p\033[00m, \033[01m-parallel\033[00m\tEjecución en paralelo usando \033[01mparallel\033[00m.\n
+\t\033[01m-k\033[00m, \033[01m--killfiles\033[00m\tElimina los archivos generados durante el proceso, sobreviven las salidas únicamente.\n
+\t\033[01m-v\033[00m, \033[01m--verbose\033[00m\tMuestra las salidas a pantalla.\n
+\t\033[01m-h\033[00m, \033[01m--help\033[00m\tMuestra esta ayuda y finaliza.\n
+\t\033[01m-s\033[00m, \033[01m--show\033[00m\tMuestra la gráfica en gnuplot al finalizar.\n
+\n
+\033[01mPARAMETER\033[00m\n
+\t\033[01mNUM\033[00m\tNúmero de partes en las que se dividirá el intervalo (1.1,4). Si omite se generan 100 divisiones del intervalo.\n
+\t\033[01m-o\033[00m, \033[01m--output NOMBRE\033[00m \tRenombra la salida como NOMBRE.ps, si se omite se genera diagrama_difuración.ps.\n
+\n
+\033[01mREQUERIMIENTOS MÍNIMOS\033[00m\n
+\tlogistic_, logisticGNUPlot_, gnuplot\n
+\n
+by Hector Olvera Vital\n
 hector.olvera@ciencias.unam.mx

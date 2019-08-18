@@ -14,6 +14,7 @@ paralelo=0
 killFiles=0
 outs=0
 verbose=0
+show=0
 
 comprueba=$( which gnuplot )
 
@@ -57,9 +58,12 @@ do
 			fi
 			shift
 		;;
-
+		-s|--show)
+			show=1
+		;;
 		-h|--help)
-				cat .logisticHelp_
+				#cat .logisticHelp_
+				echo -e $(cat logisticHelp_)
 				exit
 		;;
 
@@ -87,7 +91,7 @@ then
 	num=100
 fi
 
-echo -n > logis_temp.data
+echo -n > logistic_temp.data
 
 inc=$( echo "(4-2.9) / $num" | bc -l )
 
@@ -123,34 +127,43 @@ else
 			./logistic_ $i
 		fi
 	done 
-fi
+fi &&
 
 if [ $verbose -eq 1 ]
 then
 	echo 'Ordenando los registros'
-fi
-sort -n -k1 logis_temp.data | uniq > logis.data
-#sort -n -k1 logis_temp.data > logis.data
+fi &&
+
+sort -n -k1 logistic_temp.data | uniq > logistic.data &&
+#sort -n -k1 logistic_temp.data > logis.data
 
 if [ $verbose -eq 1 ]
 then
 	echo 'Ejecutando gnuplot'
-fi
+fi &&
 
-cat logisticGNUPlot_ | gnuplot
+cat logisticGNUPlot_ | gnuplot &&
 
 if [ $outs -eq 1 ]
 then
 	mv diagrama_difuración.ps "$nameOut".ps
-	echo Se creó la salida "$nameOut".ps.
+	mv diagrama_difuración.png "$nameOut".png
+	echo Se creó la salida $nameOut.ps y $nameOut.png.
 else
-	echo Se creó la salida diagrama_difuración.ps.
-fi
+	echo Se creó la salida diagrama_difuración.ps y diagrama_difuración.png.
+fi &&
+rm logistic_temp.data &&
 
 if [ $killFiles -eq 1 ]
 then
-	rm logis.data
-	rm logis_temp.data
+	rm logistic.data	
 else
-	echo 'Para ver la gráfica detallada ejecuta gnuplot> plot "logis.data" u 1:2'	
+	mv logistic.data logistic_$num.data
+	if [ $show -eq 1 ]
+	then
+		gnuplot -e 'set title "Diagama de birfurcacion x_{n+1}= r * x_n(1-x_n)";set xlabel "r";set ylabel "x";plot "logistic_$num.data" u 1:2 t "" pt 12'
+	else
+		echo 'Para ver la gráfica detallada ejecuta gnuplot> plot "logistic_$num.data" u 1:2'
+	fi
 fi
+

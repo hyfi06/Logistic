@@ -36,7 +36,6 @@ then
 	r=1.1
 fi
 
-
 for i in `seq $n`
 do
 	x=$( echo "$r*$x*(1-$x)"| bc -l )
@@ -44,9 +43,9 @@ do
 	then
 		echo -e "$r\t$x"
 	fi
-done >> logis_temp.data
+done >> logistic_temp.data
 
 if [ $verbose -eq 1 ]
 then
-	echo "Se escribieron de x_$corte a x_$n con r = $r en logis.data"
+	echo -e "Se escribieron de x_$corte a x_$n con r = $r en logistic.data"
 fi
