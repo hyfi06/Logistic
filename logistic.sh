@@ -1,6 +1,6 @@
 #!/bin/bash
 #####################################################
-#   logistica.sh                                    #
+#   logistic.sh                                     #
 #   by Hector Olvera Vital                          #
 #   hector.olvera@ciencias.unam.mx                  #
 ################Resumen##############################
@@ -93,17 +93,17 @@ fi
 
 echo -n > logistic_temp.data
 
-inc=$( echo "(4-2.9) / $num" | bc -l )
+inc=$( echo "(4-2.95) / $num" | bc -l )
 
 if [[ $paralelo -eq 1 ]]
 then
 	if [ $verbose -eq 1 ]
 	then
-		seq 1.1 0.018 2.89 | parallel ./logistic_ -v {}
-		seq 2.9 $inc 4 | parallel ./logistic_ -v {}
+		seq 1.1 0.0185 2.94 | parallel ./logistic_ -v {}
+		seq 2.95 $inc 4 | parallel ./logistic_ -v {}
 	else
-		seq 1.1 0.018 2.89 | parallel ./logistic_ {}
-		seq 2.9 $inc 4 | parallel ./logistic_ {}
+		seq 1.1 0.0185 2.94 | parallel ./logistic_ {}
+		seq 2.95 $inc 4 | parallel ./logistic_ {}
 	fi
 else
 	x=$( seq 1.1 0.018 2.89 )
@@ -137,21 +137,19 @@ fi &&
 sort -n -k1 logistic_temp.data | uniq > logistic.data &&
 #sort -n -k1 logistic_temp.data > logis.data
 
-if [ $verbose -eq 1 ]
-then
-	echo 'Ejecutando gnuplot'
-fi &&
-
 cat logisticGNUPlot_ | gnuplot &&
 
 if [ $outs -eq 1 ]
 then
-	mv diagrama_difuración.ps "$nameOut".ps
+	#mv diagrama_difuración.ps "$nameOut".ps
 	mv diagrama_difuración.png "$nameOut".png
-	echo Se creó la salida $nameOut.ps y $nameOut.png.
+	echo Se creó la salida $nameOut.png.
 else
-	echo Se creó la salida diagrama_difuración.ps y diagrama_difuración.png.
+	#mv diagrama_difuración.ps "$nameOut".ps
+	mv diagrama_difuración.png diagrama_difuración_$num.png
+	echo Se creó la salida diagrama_difuración_$num.png.
 fi &&
+
 rm logistic_temp.data &&
 
 if [ $killFiles -eq 1 ]
@@ -161,9 +159,9 @@ else
 	mv logistic.data logistic_$num.data
 	if [ $show -eq 1 ]
 	then
-		gnuplot -e 'set title "Diagama de birfurcacion x_{n+1}= r * x_n(1-x_n)";set xlabel "r";set ylabel "x";plot "logistic_$num.data" u 1:2 t "" pt 12'
+		echo 'Ejecutando gnuplot. Oprima ENTER para salir.'
+		gnuplot -e "set title 'Diagama de birfurcacion x_{n+1}= r * x_n(1-x_n)';set xlabel 'r';set ylabel 'x';plot 'logistic_$num.data' u 1:2 t '' pt 12; pause -1"
 	else
-		echo 'Para ver la gráfica detallada ejecuta gnuplot> plot "logistic_$num.data" u 1:2'
+		echo "Para ver la gráfica detallada ejecuta gnuplot> plot 'logistic_$num.data' u 1:2"
 	fi
 fi
-
