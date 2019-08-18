@@ -17,7 +17,7 @@ LOGISTIC(1)\n
 \t\033[01m-o\033[00m, \033[01m--output NOMBRE\033[00m \tRenombra la salida como NOMBRE.ps, si se omite se genera diagrama_difuración.ps.\n
 \n
 \033[01mREQUERIMIENTOS MÍNIMOS\033[00m\n
-\tlogistic_, logisticGNUPlot_, gnuplot\n
+\tlogisticKernel.sh, logistic.gp, gnuplot\n
 \n
 by Hector Olvera Vital\n
 hector.olvera@ciencias.unam.mx

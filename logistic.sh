@@ -99,11 +99,11 @@ if [[ $paralelo -eq 1 ]]
 then
 	if [ $verbose -eq 1 ]
 	then
-		seq 1.1 0.018 2.89 | parallel ./logistic_ -v {}
-		seq 2.9 $inc 4 | parallel ./logistic_ -v {}
+		seq 1.1 0.018 2.89 | parallel ./logisticKernel.sh -v {}
+		seq 2.9 $inc 4 | parallel ./logisticKernel.sh -v {}
 	else
-		seq 1.1 0.018 2.89 | parallel ./logistic_ {}
-		seq 2.9 $inc 4 | parallel ./logistic_ {}
+		seq 1.1 0.018 2.89 | parallel ./logisticKernel.sh {}
+		seq 2.9 $inc 4 | parallel ./logisticKernel.sh {}
 	fi
 else
 	x=$( seq 1.1 0.018 2.89 )
@@ -111,9 +111,9 @@ else
 	do
 		if [ $verbose -eq 1 ]
 		then
-			./logistic_ -v $i
+			./logisticKernel.sh -v $i
 		else
-			./logistic_ $i
+			./logisticKernel.sh $i
 		fi
 	done
 
@@ -142,7 +142,7 @@ then
 	echo 'Ejecutando gnuplot'
 fi &&
 
-cat logisticGNUPlot_ | gnuplot &&
+cat logistic.gp | gnuplot &&
 
 if [ $outs -eq 1 ]
 then
